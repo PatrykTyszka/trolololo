@@ -1,0 +1,9 @@
+<h3>Dodaj Board</h3>
+<input #newBoard>
+<button (click)="addBoard(newBoard.value); newBoard.value=''">Add!</button>
+<p>Boards:</p>
+<ul>
+  <li *ngFor="let board of boards">
+    id: {{ board.id }}, name: {{ board.name }}
+  </li>
+</ul>
