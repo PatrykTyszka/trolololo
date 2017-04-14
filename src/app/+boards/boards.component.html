@@ -1,0 +1,7 @@
+<h3>Add Board</h3>
+<input #newBoard>
+<button (click)="addBoard(newBoard.value); newBoard.value=''">Add!</button>
+<p>Boards:</p>
+<div class="test" *ngFor="let board of boards">
+  <board [board]="board"></board>
+</div>

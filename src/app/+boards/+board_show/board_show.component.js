@@ -10,24 +10,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var board_1 = require("./board");
-var BoardsListComponent = (function () {
-    function BoardsListComponent() {
-        this.boards = [];
+var BoardShowComponent = (function () {
+    function BoardShowComponent() {
     }
-    BoardsListComponent.prototype.addBoard = function (val) {
-        var id = this.boards.length + 1;
-        this.boards.push(new board_1.Board(id, val));
-    };
-    return BoardsListComponent;
+    return BoardShowComponent;
 }());
-BoardsListComponent = __decorate([
+BoardShowComponent = __decorate([
     core_1.Component({
-        selector: 'boards-list',
-        templateUrl: './boards_list.component.html',
-        styleUrls: ['./boards_list.component.scss'],
+        selector: 'board-show',
+        template: 'show',
     }),
     __metadata("design:paramtypes", [])
-], BoardsListComponent);
-exports.BoardsListComponent = BoardsListComponent;
-//# sourceMappingURL=boards_list.component.js.map
+], BoardShowComponent);
+exports.BoardShowComponent = BoardShowComponent;
+//# sourceMappingURL=board_show.component.js.map
