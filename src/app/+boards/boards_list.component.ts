@@ -4,6 +4,7 @@ import { Board } from './board'
 @Component({
   selector: 'boards-list',
   templateUrl: './boards_list.component.html',
+  styleUrls: ['./boards_list.component.scss'],
 })
 export class BoardsListComponent {
   boards: Array<Board>;

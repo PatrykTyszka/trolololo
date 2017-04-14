@@ -25,6 +25,7 @@ BoardsListComponent = __decorate([
     core_1.Component({
         selector: 'boards-list',
         templateUrl: './boards_list.component.html',
+        styleUrls: ['./boards_list.component.scss'],
     }),
     __metadata("design:paramtypes", [])
 ], BoardsListComponent);
