@@ -1,21 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Board } from './board'
+import { BoardService } from '../shared/services/board.service'
 @Component({
   selector: 'boards-list',
   templateUrl: './boards.component.html',
   styleUrls: ['./boards.component.scss'],
 })
-export class BoardsComponent {
-  boards: Array<Board>;
+export class BoardsComponent implements OnInit {
+  boards: Board[];
+  errorMessage: string;
   someText: string;
-  constructor() {
-    this.boards = [];
-    this.someText = 'ttteext';
+  constructor(private boardService: BoardService) {}
+
+  ngOnInit() { this.getBoards(); }
+
+  getBoards() {
+    this.boardService
+      .getBoards()
+      .subscribe(boards => this.boards = boards,
+                 error =>  this.errorMessage = <any>error);
   }
 
   addBoard(val: string) {
-    let id = this.boards.length + 1;
-    this.boards.push(new Board(id, val));
+    this.boardService.create(val)
+      .subscribe(board  => this.boards.push(board),
+                 error =>  this.errorMessage = <any>error);
   }
 }
