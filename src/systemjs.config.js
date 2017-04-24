@@ -6,12 +6,13 @@
   System.config({
     paths: {
       // paths serve as alias
-      'npm:': 'node_modules/'
+      'npm:': 'node_modules/',
+      dist_app: '../dist/app',
     },
     // map tells the System loader where to look for things
     map: {
       // our app is within the app folder
-      'app': 'app',
+     'app': 'app',
 
       // angular bundles
       '@angular/animations': 'npm:@angular/animations/bundles/animations.umd.js',
@@ -43,6 +44,10 @@
             loader: 'systemjs-angular-loader.js'
           }
         }
+      },
+      dist_app: {
+        format: 'register',
+        defaultExtension: 'js'
       },
       rxjs: {
         defaultExtension: 'js'
