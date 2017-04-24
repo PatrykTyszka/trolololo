@@ -10,15 +10,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var board_1 = require("./board");
+var board_service_1 = require("../shared/services/board.service");
 var BoardsComponent = (function () {
-    function BoardsComponent() {
-        this.boards = [];
-        this.someText = 'ttteext';
+    function BoardsComponent(boardService) {
+        this.boardService = boardService;
     }
+    BoardsComponent.prototype.ngOnInit = function () { this.getBoards(); };
+    BoardsComponent.prototype.getBoards = function () {
+        var _this = this;
+        this.boardService
+            .getBoards()
+            .subscribe(function (boards) { return _this.boards = boards; }, function (error) { return _this.errorMessage = error; });
+    };
     BoardsComponent.prototype.addBoard = function (val) {
-        var id = this.boards.length + 1;
-        this.boards.push(new board_1.Board(id, val));
+        var _this = this;
+        this.boardService.create(val)
+            .subscribe(function (board) { return _this.boards.push(board); }, function (error) { return _this.errorMessage = error; });
     };
     return BoardsComponent;
 }());
@@ -28,7 +35,7 @@ BoardsComponent = __decorate([
         templateUrl: './boards.component.html',
         styleUrls: ['./boards.component.scss'],
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [board_service_1.BoardService])
 ], BoardsComponent);
 exports.BoardsComponent = BoardsComponent;
 //# sourceMappingURL=boards.component.js.map
