@@ -14,30 +14,35 @@ var http_1 = require("@angular/http");
 var http_2 = require("@angular/http");
 require("rxjs/add/operator/catch");
 require("rxjs/add/operator/map");
-var BoardService = (function () {
-    function BoardService(http) {
+var AuthService = (function () {
+    function AuthService(http) {
         this.http = http;
         this.headers = new http_2.Headers({ 'Content-Type': 'application/json' });
         this.options = new http_2.RequestOptions({ headers: this.headers });
     }
-    BoardService.prototype.getBoards = function () {
-        return this.http.get('http://localhost:3000/api/v1/boards')
-            .map(function (response) { return response.json(); });
+    AuthService.prototype.signIn = function (credentials) {
+        var _this = this;
+        var data = { 'auth': { 'email': credentials.email, 'password': credentials.password } };
+        return this.http.post('http://localhost:3000/api/v1/auth/auth_token', data, this.options)
+            .map(function (resp) { return _this.setJwtToken(resp); })
+            .map(function (token) { return _this.setToken(token); });
     };
-    BoardService.prototype.create = function (title) {
-        var data = { 'board': { 'title': title } };
-        return this.http.post('http://localhost:3000/api/v1/boards', JSON.stringify(data), this.options)
-            .map(function (response) { return response.json(); });
+    AuthService.prototype.setToken = function (jwt) {
+        localStorage.setItem('id_token', jwt);
+        return jwt;
     };
-    BoardService.prototype.destroy = function (id) {
-        return this.http.delete('http://localhost:3000/api/v1/boards/' + id, this.options)
-            .map(function (response) { return response.json(); });
+    AuthService.prototype.setJwtToken = function (resp) {
+        var response = resp.json();
+        if (!response.jwt) {
+            throw Error('JWT token missing');
+        }
+        return response.jwt;
     };
-    return BoardService;
+    return AuthService;
 }());
-BoardService = __decorate([
+AuthService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [http_1.Http])
-], BoardService);
-exports.BoardService = BoardService;
-//# sourceMappingURL=board.service.js.map
+], AuthService);
+exports.AuthService = AuthService;
+//# sourceMappingURL=auth.service.js.map

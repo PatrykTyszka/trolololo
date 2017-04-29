@@ -36,7 +36,7 @@ export class BoardsComponent implements OnInit {
                  error =>  this.errorMessage = <any>error);
   }
 
-  private removeBoard(board_id) {
+  private removeBoard(board_id: number) {
     let indexToRemove = this.boards.findIndex(board => board.id == board_id)
     this.boards.splice(indexToRemove, 1)
   }

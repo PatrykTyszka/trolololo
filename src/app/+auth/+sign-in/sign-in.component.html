@@ -1,0 +1,17 @@
+<h1>Sign in</h1>
+
+<form novalidate [formGroup]='form' (ngSubmit)='submitForm(form.value)'>
+  <label>Email</label>
+  <input type="text" placeholder="Email" formControlName='email'>
+  <span *ngIf="form.get('email').errors && form.get('email').touched">
+    <small *ngIf="form.get('email')">required</small>
+  </span>
+  <br>
+  <label>Password</label>
+  <input type="password" placeholder="Password" formControlName='password'>
+  <span *ngIf="form.get('password').errors && form.get('password').touched">
+    <small *ngIf="form.get('password')">required</small>
+  </span>
+  <br>
+  <button type="submit" [disabled]='!form.valid'>Sign In</button>
+</form>

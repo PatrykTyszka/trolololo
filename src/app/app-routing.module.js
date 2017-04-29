@@ -10,8 +10,10 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var boards_component_1 = require("./+boards/boards.component");
 var page_not_found_component_1 = require("./+error_pages/+page_not_found/page_not_found.component");
+var sign_in_component_1 = require("./+auth/+sign-in/sign-in.component");
 var appRoutes = [
     { path: 'boards', component: boards_component_1.BoardsComponent },
+    { path: 'sign-in', component: sign_in_component_1.SignInComponent },
     { path: '**', component: page_not_found_component_1.PageNotFoundComponent },
 ];
 var AppRoutingModule = (function () {

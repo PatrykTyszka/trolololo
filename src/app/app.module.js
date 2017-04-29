@@ -11,6 +11,7 @@ var platform_browser_1 = require("@angular/platform-browser");
 var app_component_1 = require("./app.component");
 var app_routing_module_1 = require("./app-routing.module");
 var boards_module_1 = require("./+boards/boards.module");
+var auth_module_1 = require("./+auth/auth.module");
 var page_not_found_component_1 = require("./+error_pages/+page_not_found/page_not_found.component");
 var AppModule = (function () {
     function AppModule() {
@@ -23,6 +24,7 @@ AppModule = __decorate([
             platform_browser_1.BrowserModule,
             boards_module_1.BoardsModule,
             app_routing_module_1.AppRoutingModule,
+            auth_module_1.AuthModule,
         ],
         declarations: [
             app_component_1.AppComponent,

@@ -10,10 +10,13 @@ import { Board } from '../../+boards/board'
 
 @Injectable()
 export class BoardService {
-    constructor(private http: Http) {
-      this.headers = new Headers({ 'Content-Type': 'application/json' });
-      this.options = new RequestOptions({ headers: this.headers });
-    }
+  headers: any;
+  options: any;
+
+  constructor(private http: Http) {
+    this.headers = new Headers({ 'Content-Type': 'application/json' });
+    this.options = new RequestOptions({ headers: this.headers });
+  }
 
   getBoards(): Observable<Board[]> {
     return this.http.get('http://localhost:3000/api/v1/boards')
@@ -28,7 +31,7 @@ export class BoardService {
   }
 
   destroy(id: number): Observable<Board> {
-    return this.http.delete('http://localhost:3000/api/v1/boards/' + id, JSON.stringify({}), this.options)
+    return this.http.delete('http://localhost:3000/api/v1/boards/' + id, this.options)
                     .map((response: any) => response.json());
   }
 }
