@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import 'rxjs/add/operator/map';
+
 import { Board } from './board'
 import { BoardService } from '../shared/services/board.service'
 @Component({
@@ -26,5 +28,19 @@ export class BoardsComponent implements OnInit {
     this.boardService.create(val)
       .subscribe(board  => this.boards.push(board),
                  error =>  this.errorMessage = <any>error);
+  }
+
+  destroyBoard(board_id: number) {
+    this.boardService.destroy(board_id)
+      .subscribe(board  => this.removeBoard(board.id),
+                 error =>  this.errorMessage = <any>error);
+  }
+
+  private removeBoard(board_id) {
+    this.boards.forEach((board, index) => {
+      if (board.id == board_id) {
+        this.boards.splice(index, 1)
+      }
+    });
   }
 }

@@ -1,1 +1,4 @@
-<button class="btn-board" (click)="onSelect(board.id)">{{ board.title }}</button>
+<div>
+  <button class="btn-board" (click)="onSelect(board.id)">{{ board.title }}</button>
+  <span class="btn-delete" (click)="onDelete(board.id)">x</span>
+</div>

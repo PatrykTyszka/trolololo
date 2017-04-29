@@ -17,16 +17,20 @@ require("rxjs/add/operator/map");
 var BoardService = (function () {
     function BoardService(http) {
         this.http = http;
+        this.headers = new http_2.Headers({ 'Content-Type': 'application/json' });
+        this.options = new http_2.RequestOptions({ headers: this.headers });
     }
     BoardService.prototype.getBoards = function () {
         return this.http.get('http://localhost:3000/api/v1/boards')
             .map(function (response) { return response.json(); });
     };
     BoardService.prototype.create = function (title) {
-        var headers = new http_2.Headers({ 'Content-Type': 'application/json' });
-        var options = new http_2.RequestOptions({ headers: headers });
         var data = { 'board': { 'title': title } };
-        return this.http.post('http://localhost:3000/api/v1/boards', JSON.stringify(data), options)
+        return this.http.post('http://localhost:3000/api/v1/boards', JSON.stringify(data), this.options)
+            .map(function (response) { return response.json(); });
+    };
+    BoardService.prototype.destroy = function (id) {
+        return this.http.delete('http://localhost:3000/api/v1/boards/' + id, JSON.stringify({}), this.options)
             .map(function (response) { return response.json(); });
     };
     return BoardService;

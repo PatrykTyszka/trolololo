@@ -18,7 +18,7 @@ var BoardShowComponent = (function () {
 BoardShowComponent = __decorate([
     core_1.Component({
         selector: 'board-show',
-        template: 'show',
+        template: 'show!!',
     }),
     __metadata("design:paramtypes", [])
 ], BoardShowComponent);

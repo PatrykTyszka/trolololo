@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+require("rxjs/add/operator/map");
 var board_service_1 = require("../shared/services/board.service");
 var BoardsComponent = (function () {
     function BoardsComponent(boardService) {
@@ -26,6 +27,19 @@ var BoardsComponent = (function () {
         var _this = this;
         this.boardService.create(val)
             .subscribe(function (board) { return _this.boards.push(board); }, function (error) { return _this.errorMessage = error; });
+    };
+    BoardsComponent.prototype.destroyBoard = function (board_id) {
+        var _this = this;
+        this.boardService.destroy(board_id)
+            .subscribe(function (board) { return _this.removeBoard(board.id); }, function (error) { return _this.errorMessage = error; });
+    };
+    BoardsComponent.prototype.removeBoard = function (board_id) {
+        var _this = this;
+        this.boards.forEach(function (board, index) {
+            if (board.id == board_id) {
+                _this.boards.splice(index, 1);
+            }
+        });
     };
     return BoardsComponent;
 }());

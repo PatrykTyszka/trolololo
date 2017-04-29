@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
+import { BoardService } from '../../shared/services/board.service';
 import { Board } from '../board'
 @Component({
   selector: 'board',
@@ -9,11 +10,16 @@ import { Board } from '../board'
 })
 export class BoardComponent {
   @Input() board: Board;
+  @Output() onDestroyBoard = new EventEmitter<number>();
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private boardService: BoardService) { }
+
+  onSelect(board_id: number) {
+     this.router.navigate(['/boards', board_id]);
   }
 
-   onSelect(board_id: number) {
-     this.router.navigate(['/boards', board_id]);
+  onDelete(board_id: number) {
+    this.onDestroyBoard.emit(board_id);
   }
 }

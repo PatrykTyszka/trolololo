@@ -3,5 +3,5 @@
 <button (click)="addBoard(newBoard.value); newBoard.value=''">Add!</button>
 <p>Boards:</p>
 <div class="test" *ngFor="let board of boards">
-  <board [board]="board"></board>
+  <board [board]="board" (onDestroyBoard)="destroyBoard($event)"></board>
 </div>
