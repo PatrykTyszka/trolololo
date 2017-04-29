@@ -34,12 +34,8 @@ var BoardsComponent = (function () {
             .subscribe(function (board) { return _this.removeBoard(board.id); }, function (error) { return _this.errorMessage = error; });
     };
     BoardsComponent.prototype.removeBoard = function (board_id) {
-        var _this = this;
-        this.boards.forEach(function (board, index) {
-            if (board.id == board_id) {
-                _this.boards.splice(index, 1);
-            }
-        });
+        var indexToRemove = this.boards.findIndex(function (board) { return board.id == board_id; });
+        this.boards.splice(indexToRemove, 1);
     };
     return BoardsComponent;
 }());

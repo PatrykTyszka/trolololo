@@ -37,10 +37,7 @@ export class BoardsComponent implements OnInit {
   }
 
   private removeBoard(board_id) {
-    this.boards.forEach((board, index) => {
-      if (board.id == board_id) {
-        this.boards.splice(index, 1)
-      }
-    });
+    let indexToRemove = this.boards.findIndex(board => board.id == board_id)
+    this.boards.splice(indexToRemove, 1)
   }
 }
