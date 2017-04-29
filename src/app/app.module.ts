@@ -11,7 +11,7 @@ import { BoardComponent } from './+boards/+board/board.component';
 import { BoardShowComponent } from './+boards/+board_show/board_show.component';
 
 import { AuthModule } from './+auth/auth.module';
-
+import { AuthGuard } from './shared/auth.guard';
 import { PageNotFoundComponent } from './+error_pages/+page_not_found/page_not_found.component';
 
 
@@ -25,6 +25,9 @@ import { PageNotFoundComponent } from './+error_pages/+page_not_found/page_not_f
   declarations: [
     AppComponent,
     PageNotFoundComponent,
+  ],
+  providers: [
+    AuthGuard,
   ],
   bootstrap: [ AppComponent ]
 })

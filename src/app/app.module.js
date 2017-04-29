@@ -12,6 +12,7 @@ var app_component_1 = require("./app.component");
 var app_routing_module_1 = require("./app-routing.module");
 var boards_module_1 = require("./+boards/boards.module");
 var auth_module_1 = require("./+auth/auth.module");
+var auth_guard_1 = require("./shared/auth.guard");
 var page_not_found_component_1 = require("./+error_pages/+page_not_found/page_not_found.component");
 var AppModule = (function () {
     function AppModule() {
@@ -29,6 +30,9 @@ AppModule = __decorate([
         declarations: [
             app_component_1.AppComponent,
             page_not_found_component_1.PageNotFoundComponent,
+        ],
+        providers: [
+            auth_guard_1.AuthGuard,
         ],
         bootstrap: [app_component_1.AppComponent]
     })

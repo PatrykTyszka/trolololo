@@ -24,6 +24,6 @@ export class SignInComponent {
   }
 
   onSuccess(jwt: string) {
-    console.log("JWT " + jwt);
+    // get user and set CurrentUser.
   }
 }

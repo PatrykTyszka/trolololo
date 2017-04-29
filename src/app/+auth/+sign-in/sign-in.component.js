@@ -27,7 +27,7 @@ var SignInComponent = (function () {
             .subscribe(function (auth) { return _this.onSuccess(auth); }, function (error) { return console.log('Unauthorized!'); });
     };
     SignInComponent.prototype.onSuccess = function (jwt) {
-        console.log("JWT " + jwt);
+        // get user and set CurrentUser.
     };
     return SignInComponent;
 }());
