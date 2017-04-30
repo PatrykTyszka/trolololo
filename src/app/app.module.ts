@@ -14,6 +14,7 @@ import { AuthModule } from './+auth/auth.module';
 import { AuthGuard } from './shared/auth.guard';
 import { PageNotFoundComponent } from './+error_pages/+page_not_found/page_not_found.component';
 
+import { NavbarService } from './shared/services/navbar.service';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { PageNotFoundComponent } from './+error_pages/+page_not_found/page_not_f
   ],
   providers: [
     AuthGuard,
+    NavbarService,
   ],
   bootstrap: [ AppComponent ]
 })

@@ -11,11 +11,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
+var router_1 = require("@angular/router");
+var common_1 = require("@angular/common");
 var auth_service_1 = require("../services/auth.service");
+var navbar_service_1 = require("../../shared/services/navbar.service");
 var SignInComponent = (function () {
-    function SignInComponent(fb, authService) {
+    function SignInComponent(fb, authService, _location, router, navbarService) {
         this.fb = fb;
         this.authService = authService;
+        this._location = _location;
+        this.router = router;
+        this.navbarService = navbarService;
+        if (this.authService.loggedIn()) {
+            this._location.back();
+        }
         this.form = fb.group({
             email: ['', forms_1.Validators.required],
             password: ['', forms_1.Validators.required],
@@ -28,6 +37,8 @@ var SignInComponent = (function () {
     };
     SignInComponent.prototype.onSuccess = function (jwt) {
         // get user and set CurrentUser.
+        this.navbarService.setFlag({ navbar: true });
+        this.router.navigate(['/boards']);
     };
     return SignInComponent;
 }());
@@ -36,7 +47,11 @@ SignInComponent = __decorate([
         selector: 'sign-in',
         templateUrl: './sign-in.component.html'
     }),
-    __metadata("design:paramtypes", [forms_1.FormBuilder, auth_service_1.AuthService])
+    __metadata("design:paramtypes", [forms_1.FormBuilder,
+        auth_service_1.AuthService,
+        common_1.Location,
+        router_1.Router,
+        navbar_service_1.NavbarService])
 ], SignInComponent);
 exports.SignInComponent = SignInComponent;
 //# sourceMappingURL=sign-in.component.js.map

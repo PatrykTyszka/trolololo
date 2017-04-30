@@ -14,6 +14,7 @@ var boards_module_1 = require("./+boards/boards.module");
 var auth_module_1 = require("./+auth/auth.module");
 var auth_guard_1 = require("./shared/auth.guard");
 var page_not_found_component_1 = require("./+error_pages/+page_not_found/page_not_found.component");
+var navbar_service_1 = require("./shared/services/navbar.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -33,6 +34,7 @@ AppModule = __decorate([
         ],
         providers: [
             auth_guard_1.AuthGuard,
+            navbar_service_1.NavbarService,
         ],
         bootstrap: [app_component_1.AppComponent]
     })
