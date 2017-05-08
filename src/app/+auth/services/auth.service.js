@@ -37,7 +37,7 @@ var AuthService = (function () {
     };
     AuthService.prototype.logout = function () {
         localStorage.removeItem('id_token');
-        this.navbarService.setFlag({ navbar: false });
+        this.navbarService.setFlag(false);
         this.router.navigate(['/sign-in']);
     };
     AuthService.prototype.setToken = function (jwt) {

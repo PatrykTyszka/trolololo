@@ -14,12 +14,15 @@ export class BoardService {
   options: any;
 
   constructor(private http: Http) {
-    this.headers = new Headers({ 'Content-Type': 'application/json' });
+    this.headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('id_token')}`,
+    });
     this.options = new RequestOptions({ headers: this.headers });
   }
 
   getBoards(): Observable<Board[]> {
-    return this.http.get('http://localhost:3000/api/v1/boards')
+    return this.http.get('http://localhost:3000/api/v1/boards', this.options)
                     .map((response: any) => response.json());
   }
 

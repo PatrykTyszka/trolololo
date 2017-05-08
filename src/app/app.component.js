@@ -18,7 +18,7 @@ var AppComponent = (function () {
         this.authService = authService;
         this.navbarService = navbarService;
         this.showNavbar = !!this.authService.loggedIn();
-        this.subscription = this.navbarService.show().subscribe(function (val) { _this.showNavbar = val.navbar; });
+        this.navbarService.show().subscribe(function (val) { _this.showNavbar = val; });
     }
     AppComponent.prototype.signOut = function () {
         this.authService.logout();

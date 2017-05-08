@@ -34,7 +34,7 @@ export class AuthService {
 
   public logout() {
     localStorage.removeItem('id_token');
-    this.navbarService.setFlag({navbar: false});
+    this.navbarService.setFlag(false);
     this.router.navigate(['/sign-in']);
   }
 

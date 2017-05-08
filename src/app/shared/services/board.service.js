@@ -17,11 +17,14 @@ require("rxjs/add/operator/map");
 var BoardService = (function () {
     function BoardService(http) {
         this.http = http;
-        this.headers = new http_2.Headers({ 'Content-Type': 'application/json' });
+        this.headers = new http_2.Headers({
+            'Content-Type': 'application/json',
+            'Authorization': "Bearer " + localStorage.getItem('id_token'),
+        });
         this.options = new http_2.RequestOptions({ headers: this.headers });
     }
     BoardService.prototype.getBoards = function () {
-        return this.http.get('http://localhost:3000/api/v1/boards')
+        return this.http.get('http://localhost:3000/api/v1/boards', this.options)
             .map(function (response) { return response.json(); });
     };
     BoardService.prototype.create = function (title) {

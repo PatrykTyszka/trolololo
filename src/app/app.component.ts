@@ -16,7 +16,7 @@ export class AppComponent {
   constructor(private authService: AuthService,
               private navbarService: NavbarService) {
     this.showNavbar = !!this.authService.loggedIn();
-    this.subscription = this.navbarService.show().subscribe(val => { this.showNavbar = val.navbar });
+    this.navbarService.show().subscribe(val => { this.showNavbar = val });
   }
 
   public signOut() {

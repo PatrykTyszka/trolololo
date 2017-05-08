@@ -36,7 +36,7 @@ export class SignInComponent {
 
   onSuccess(jwt: string) {
     // get user and set CurrentUser.
-    this.navbarService.setFlag({navbar: true});
+    this.navbarService.setFlag(true);
     this.router.navigate(['/boards']);
   }
 }

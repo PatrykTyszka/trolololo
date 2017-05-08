@@ -37,7 +37,7 @@ var SignInComponent = (function () {
     };
     SignInComponent.prototype.onSuccess = function (jwt) {
         // get user and set CurrentUser.
-        this.navbarService.setFlag({ navbar: true });
+        this.navbarService.setFlag(true);
         this.router.navigate(['/boards']);
     };
     return SignInComponent;
