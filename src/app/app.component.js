@@ -12,15 +12,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var auth_service_1 = require("./+auth/services/auth.service");
 var navbar_service_1 = require("./shared/services/navbar.service");
+var notifications_service_1 = require("./shared/services/notifications.service");
 var AppComponent = (function () {
-    function AppComponent(authService, navbarService) {
+    function AppComponent(authService, navbarService, notificationsService) {
         var _this = this;
         this.authService = authService;
         this.navbarService = navbarService;
+        this.notificationsService = notificationsService;
         this.showNavbar = !!this.authService.loggedIn();
         this.navbarService.show().subscribe(function (val) { _this.showNavbar = val; });
     }
     AppComponent.prototype.signOut = function () {
+        this.notificationsService.notice('Logout!');
         this.authService.logout();
     };
     return AppComponent;
@@ -32,7 +35,8 @@ AppComponent = __decorate([
         styleUrls: ['./app.component.scss'],
     }),
     __metadata("design:paramtypes", [auth_service_1.AuthService,
-        navbar_service_1.NavbarService])
+        navbar_service_1.NavbarService,
+        notifications_service_1.NotificationsService])
 ], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map

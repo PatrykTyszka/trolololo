@@ -12,17 +12,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var board_service_1 = require("../../shared/services/board.service");
+var notifications_service_1 = require("./../../shared/services/notifications.service");
 var board_1 = require("../board");
 var BoardComponent = (function () {
-    function BoardComponent(router, boardService) {
+    function BoardComponent(router, boardService, notificationsService) {
         this.router = router;
         this.boardService = boardService;
+        this.notificationsService = notificationsService;
         this.onDestroyBoard = new core_1.EventEmitter();
     }
     BoardComponent.prototype.onSelect = function (board_id) {
         this.router.navigate(['/boards', board_id]);
     };
     BoardComponent.prototype.onDelete = function (board_id) {
+        this.notificationsService.notice("Board with id: " + board_id + " was successfully destroyed!");
         this.onDestroyBoard.emit(board_id);
     };
     return BoardComponent;
@@ -42,7 +45,8 @@ BoardComponent = __decorate([
         styleUrls: ['./board.component.scss'],
     }),
     __metadata("design:paramtypes", [router_1.Router,
-        board_service_1.BoardService])
+        board_service_1.BoardService,
+        notifications_service_1.NotificationsService])
 ], BoardComponent);
 exports.BoardComponent = BoardComponent;
 //# sourceMappingURL=board.component.js.map
