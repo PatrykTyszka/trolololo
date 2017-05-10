@@ -25,17 +25,27 @@ var BoardsComponent = (function () {
     };
     BoardsComponent.prototype.addBoard = function (val) {
         var _this = this;
+        this.titleError = null;
         this.boardService.create(val)
-            .subscribe(function (board) { return _this.boards.push(board); }, function (error) { return _this.errorMessage = error; });
+            .subscribe(function (board) { return _this.boards.push(board); }, function (response) { return _this.addBoardError(response); });
     };
     BoardsComponent.prototype.destroyBoard = function (board_id) {
         var _this = this;
         this.boardService.destroy(board_id)
-            .subscribe(function (board) { return _this.removeBoard(board.id); }, function (error) { return _this.errorMessage = error; });
+            .subscribe(function (board) { return _this.removeBoard(board.id); }, function (response) { return _this.errorMessage = response; });
     };
     BoardsComponent.prototype.removeBoard = function (board_id) {
         var indexToRemove = this.boards.findIndex(function (board) { return board.id == board_id; });
         this.boards.splice(indexToRemove, 1);
+    };
+    BoardsComponent.prototype.addBoardError = function (response) {
+        var resp = response.json();
+        if (resp.errors && resp.errors.title) {
+            this.titleError = resp.errors.title;
+        }
+        else {
+            throw 'Undefined error';
+        }
     };
     return BoardsComponent;
 }());

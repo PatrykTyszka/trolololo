@@ -1,3 +1,4 @@
+import { Response } from '@angular/http';
 import { Component, OnInit } from '@angular/core';
 
 import 'rxjs/add/operator/map';
@@ -13,6 +14,7 @@ export class BoardsComponent implements OnInit {
   boards: Board[];
   errorMessage: string;
   someText: string;
+  titleError: string;
   constructor(private boardService: BoardService) {}
 
   ngOnInit() { this.getBoards(); }
@@ -25,19 +27,29 @@ export class BoardsComponent implements OnInit {
   }
 
   addBoard(val: string) {
+    this.titleError = null;
     this.boardService.create(val)
       .subscribe(board  => this.boards.push(board),
-                 error =>  this.errorMessage = <any>error);
+                 response =>  this.addBoardError(response));
   }
 
   destroyBoard(board_id: number) {
     this.boardService.destroy(board_id)
       .subscribe(board  => this.removeBoard(board.id),
-                 error =>  this.errorMessage = <any>error);
+                 response =>  this.errorMessage = <any>response);
   }
 
   private removeBoard(board_id: number) {
     let indexToRemove = this.boards.findIndex(board => board.id == board_id)
-    this.boards.splice(indexToRemove, 1)
+    this.boards.splice(indexToRemove, 1);
+  }
+
+  private addBoardError(response: Response): void {
+    let resp = response.json();
+    if (resp.errors && resp.errors.title) {
+      this.titleError = resp.errors.title;
+    } else {
+      throw 'Undefined error';
+    }
   }
 }
