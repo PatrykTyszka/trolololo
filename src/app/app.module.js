@@ -11,10 +11,12 @@ var platform_browser_1 = require("@angular/platform-browser");
 var app_component_1 = require("./app.component");
 var app_routing_module_1 = require("./app-routing.module");
 var boards_module_1 = require("./+boards/boards.module");
+var notifications_component_1 = require("./shared/components/notifications/notifications.component");
 var auth_module_1 = require("./+auth/auth.module");
 var auth_guard_1 = require("./shared/auth.guard");
 var page_not_found_component_1 = require("./+error_pages/+page_not_found/page_not_found.component");
 var navbar_service_1 = require("./shared/services/navbar.service");
+var notifications_service_1 = require("./shared/services/notifications.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -31,10 +33,12 @@ AppModule = __decorate([
         declarations: [
             app_component_1.AppComponent,
             page_not_found_component_1.PageNotFoundComponent,
+            notifications_component_1.NotificationsComponent,
         ],
         providers: [
             auth_guard_1.AuthGuard,
             navbar_service_1.NavbarService,
+            notifications_service_1.NotificationsService,
         ],
         bootstrap: [app_component_1.AppComponent]
     })

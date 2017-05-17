@@ -15,13 +15,15 @@ var router_1 = require("@angular/router");
 var common_1 = require("@angular/common");
 var auth_service_1 = require("../services/auth.service");
 var navbar_service_1 = require("../../shared/services/navbar.service");
+var notifications_service_1 = require("./../../shared/services/notifications.service");
 var SignInComponent = (function () {
-    function SignInComponent(fb, authService, _location, router, navbarService) {
+    function SignInComponent(fb, authService, _location, router, navbarService, notificationsService) {
         this.fb = fb;
         this.authService = authService;
         this._location = _location;
         this.router = router;
         this.navbarService = navbarService;
+        this.notificationsService = notificationsService;
         if (this.authService.loggedIn()) {
             this._location.back();
         }
@@ -33,12 +35,15 @@ var SignInComponent = (function () {
     SignInComponent.prototype.submitForm = function (value) {
         var _this = this;
         this.authService.signIn({ email: value.email, password: value.password })
-            .subscribe(function (auth) { return _this.onSuccess(auth); }, function (error) { return console.log('Unauthorized!'); });
+            .subscribe(function (auth) { return _this.onSuccess(auth); }, function (error) { return _this.onError(error); });
     };
     SignInComponent.prototype.onSuccess = function (jwt) {
-        // get user and set CurrentUser.
+        this.notificationsService.notice('Logged In!');
         this.navbarService.setFlag(true);
         this.router.navigate(['/boards']);
+    };
+    SignInComponent.prototype.onError = function (error) {
+        this.notificationsService.alert('Invalid email or password!');
     };
     return SignInComponent;
 }());
@@ -51,7 +56,8 @@ SignInComponent = __decorate([
         auth_service_1.AuthService,
         common_1.Location,
         router_1.Router,
-        navbar_service_1.NavbarService])
+        navbar_service_1.NavbarService,
+        notifications_service_1.NotificationsService])
 ], SignInComponent);
 exports.SignInComponent = SignInComponent;
 //# sourceMappingURL=sign-in.component.js.map

@@ -4,7 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import 'rxjs/add/operator/map';
 
 import { Board } from './board'
-import { BoardService } from '../shared/services/board.service'
+import { BoardService } from '../shared/services/board.service';
+import { NotificationsService } from './../shared/services/notifications.service';
 @Component({
   selector: 'boards-list',
   templateUrl: './boards.component.html',
@@ -15,7 +16,9 @@ export class BoardsComponent implements OnInit {
   errorMessage: string;
   someText: string;
   titleError: string;
-  constructor(private boardService: BoardService) {}
+
+  constructor(private boardService: BoardService,
+              private notificationsService: NotificationsService) {}
 
   ngOnInit() { this.getBoards(); }
 
@@ -29,8 +32,14 @@ export class BoardsComponent implements OnInit {
   addBoard(val: string) {
     this.titleError = null;
     this.boardService.create(val)
-      .subscribe(board  => this.boards.push(board),
-                 response =>  this.addBoardError(response));
+      .subscribe(
+        board  => {
+          this.notificationsService.notice(`Board with id: ${board.id} was successfully created!`);
+          this.boards.push(board);
+        },
+        response => {
+          this.addBoardError(response);
+      });
   }
 
   destroyBoard(board_id: number) {

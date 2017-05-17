@@ -12,9 +12,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 require("rxjs/add/operator/map");
 var board_service_1 = require("../shared/services/board.service");
+var notifications_service_1 = require("./../shared/services/notifications.service");
 var BoardsComponent = (function () {
-    function BoardsComponent(boardService) {
+    function BoardsComponent(boardService, notificationsService) {
         this.boardService = boardService;
+        this.notificationsService = notificationsService;
     }
     BoardsComponent.prototype.ngOnInit = function () { this.getBoards(); };
     BoardsComponent.prototype.getBoards = function () {
@@ -27,7 +29,12 @@ var BoardsComponent = (function () {
         var _this = this;
         this.titleError = null;
         this.boardService.create(val)
-            .subscribe(function (board) { return _this.boards.push(board); }, function (response) { return _this.addBoardError(response); });
+            .subscribe(function (board) {
+            _this.notificationsService.notice("Board with id: " + board.id + " was successfully created!");
+            _this.boards.push(board);
+        }, function (response) {
+            _this.addBoardError(response);
+        });
     };
     BoardsComponent.prototype.destroyBoard = function (board_id) {
         var _this = this;
@@ -55,7 +62,8 @@ BoardsComponent = __decorate([
         templateUrl: './boards.component.html',
         styleUrls: ['./boards.component.scss'],
     }),
-    __metadata("design:paramtypes", [board_service_1.BoardService])
+    __metadata("design:paramtypes", [board_service_1.BoardService,
+        notifications_service_1.NotificationsService])
 ], BoardsComponent);
 exports.BoardsComponent = BoardsComponent;
 //# sourceMappingURL=boards.component.js.map

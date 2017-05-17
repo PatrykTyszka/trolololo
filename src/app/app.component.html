@@ -1,6 +1,6 @@
+<notify></notify>
 <nav>
   <a *ngIf="showNavbar" routerLink="/boards" routerLinkActive="active">Boards</a>
-  <a *ngIf="!showNavbar" routerLink="/sign-in" routerLinkActive="active">SignIn</a>
   <a class="logout" *ngIf="showNavbar" (click)="signOut()">SignOut</a>
 </nav>
 <router-outlet></router-outlet>
