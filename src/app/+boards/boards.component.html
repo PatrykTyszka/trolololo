@@ -1,6 +1,8 @@
 <h3>Add Board</h3>
 <input #newBoard>
 <button (click)="addBoard(newBoard.value); newBoard.value=''">Add!</button>
+<p class="error" *ngIf="titleError == 'required'">Title can't be blank</p>
+<p class="error" *ngIf="titleError == 'length'">Title is to short ( 3 char )</p>
 <p>Boards:</p>
 <div class="test" *ngFor="let board of boards">
   <board [board]="board" (onDestroyBoard)="destroyBoard($event)"></board>
